@@ -1,2 +1,3 @@
 # zsh-aliyun
-Aliyun CLI zsh plugin
+
+[Aliyun CLI](https://github.com/aliyun/aliyun-cli) zsh plugin
