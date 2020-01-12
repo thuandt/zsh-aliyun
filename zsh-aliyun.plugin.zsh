@@ -18,7 +18,7 @@ fi
 typeset -g ZSH_ALIYUN_DIR=${0:h}
 
 #compdef aliyun
-complete -o nospace -C $(which aliyun) aliyun
+complete -o nospace -F $(which aliyun) aliyun
 
 alias aliyun-region="aliyun ecs DescribeRegions | jq -r '.Regions.Region | .[] | .RegionId'"
 
