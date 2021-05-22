@@ -1,6 +1,8 @@
+# vim:ft=zsh:tw=80:sw=4:sts=4:et
+
 # -*- mode: sh; sh-indentation: 4; indent-tabs-mode: nil; sh-basic-offset: 4; -*-
 
-# Copyright (c) 2019 Thuan Duong
+# Copyright (c) 2021 Thuan Duong
 
 # According to the Zsh Plugin Standard:
 # http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html
@@ -10,16 +12,20 @@
 
 # Then ${0:h} to get plugin's directory
 
-if [[ ${zsh_loaded_plugins[-1]} != */zsh-aliyun && -z ${fpath[(r)${0:h}]} ]]
-then
+if [[ ${zsh_loaded_plugins[-1]} != */zsh-aliyun && -z ${fpath[(r)${0:h}]} ]] {
     fpath+=( "${0:h}" )
-fi
+}
 
-typeset -g ZSH_ALIYUN_DIR=${0:h}
+# Standard hash for plugins, to not pollute the namespace
+typeset -gA Plugins
+Plugins[ZSH_ALIYUN_DIR]="${0:h}"
 
 #compdef aliyun
 complete -o nospace -F $(which aliyun) aliyun
 
 alias aliyun-region="aliyun ecs DescribeRegions | jq -r '.Regions.Region | .[] | .RegionId'"
 
-# vim:ft=zsh:sw=4:sts=4:et
+# Use alternate vim marks [[[ and ]]] as the original ones can
+# confuse nested substitutions, e.g.: ${${${VAR}}}
+
+# vim:ft=zsh:tw=80:sw=4:sts=4:et:foldmarker=[[[,]]]
